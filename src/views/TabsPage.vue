@@ -11,6 +11,10 @@
       <ion-icon name="locations-regular" />
       <ion-label>Locations</ion-label>
     </ion-tab-button>
+    <ion-tab-button tab="points" @click="openPoints">
+      <ion-icon name="sales-regular" />
+      <ion-label>My Points</ion-label>
+    </ion-tab-button>
     <ion-tab-button v-if="hasAppCardCoupons || hasMidaxCoupons" tab="coupons" href="/tabs/coupons">
       <ion-icon name="barcode-coupon-regular" />
       <ion-label>Coupons</ion-label>
@@ -31,6 +35,7 @@
 <script>
 import { ref } from 'vue';
 import { IonTabBar, IonTabButton, IonTabs, IonLabel, IonIcon, IonPage, IonRouterOutlet } from '@ionic/vue';
+import { Browser } from '@capacitor/browser';
 
 export default {
   components: {
@@ -46,9 +51,17 @@ export default {
     const hasAppCardCoupons = ref(import.meta.env.VITE_HAS_APPCARD_COUPONS === "true");
     const hasMidaxCoupons = ref(import.meta.env.VITE_HAS_MIDAX_COUPONS === "true");
 
+    const openPoints = async () => {
+      await Browser.open({
+        url: `${import.meta.env.VITE_SITE_URL}/points/`,
+        presentationStyle: 'popover'
+      });
+    };
+
     return {
       hasAppCardCoupons,
-      hasMidaxCoupons
+      hasMidaxCoupons,
+      openPoints
     };
   }
 };

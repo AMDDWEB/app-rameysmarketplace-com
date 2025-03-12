@@ -1,4 +1,4 @@
-package com.allianceharshaadvertising.marketplacedev;
+package com.allianceharshaadvertising.Rameys;
 
 import com.getcapacitor.BridgeActivity;
 
